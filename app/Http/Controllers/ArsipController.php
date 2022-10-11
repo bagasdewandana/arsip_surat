@@ -55,7 +55,9 @@ class ArsipController extends Controller
     }
     public function hapus($judul)
     {
-        // menghapus data surat berdasarkan nomor yang dipilih
+        $data = Arsip::where('judul', $judul)->first();
+        unlink('dokumen/' . $data->file_surat);
+        // menghapus data surat berdasarkan judul yang dipilih
         DB::table('surat')->where('judul', $judul)->delete();
 
         // alihkan halaman ke halaman arsip
