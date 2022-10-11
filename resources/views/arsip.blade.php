@@ -96,7 +96,7 @@
                             <td>{{ $value->tanggal}}</td>
                             <td><a href="#" type="button" class="btn btn-danger delete" data-id="{{ $value->judul }}">Hapus</a>
                                 <a href="/arsip/download/{{ $value->file_surat }}" type="button" class="btn btn-warning">Unduh</a>
-                                <a href="/arsip/edit/{{ $value->nomor }}" type="button" class="btn btn-primary">Lihat >></a>
+                                <a href="/arsip/lihat/{{ $value->judul }}" type="button" class="btn btn-primary">Lihat >></a>
                             </td>
                         </tr>
                         @endforeach

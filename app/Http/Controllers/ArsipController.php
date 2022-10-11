@@ -67,4 +67,9 @@ class ArsipController extends Controller
     {
         return response()->download(public_path('dokumen/' . $file_surat));
     }
+    public function lihat($judul)
+    {
+        $data = Arsip::where('judul', $judul)->first();
+        return view('lihatsurat', compact('data'));
+    }
 }
