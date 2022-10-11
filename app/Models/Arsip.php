@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Arsip extends Model
 {
     use HasFactory;
-    public $table = 'surat';
-    public $filltable = ['*'];
+    public $timestamps = false;
+    protected $table = 'surat';
+    protected $fillable = ['*'];
 }

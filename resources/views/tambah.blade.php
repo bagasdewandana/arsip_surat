@@ -70,17 +70,23 @@
                     Catatan: </br>
                     > Gunakan file berformat PDF
                 </p>
-                <form method="POST" action="/arsip/insert">
+                <form method="POST" action="/arsip/insert" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Nomor Surat</label>
-                        <input type="text" class="form-control" name="nomor" required="required">
+                        <input type="text" class="form-control @error('nomor') is-invalid @enderror" name="nomor" value="{{ old ('nomor') }}" required=" required">
+
+                        @error('nomor')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     </br>
                     <div class="form-group">
                         <label>Kategori</label>
                         <div class="col-sm-8">
-                            <select name="kategori" class="form-control" required="required">
+                            <select name="kategori" class="form-control" value="{{ old ('kategori') }}" required=" required">
                                 <option value="Undangan">Undangan</option>
                                 <option value="Pengumuman">Pengumuman</option>
                                 <option value="Nota Dinas">Nota Dinas</option>
@@ -91,22 +97,23 @@
                     </br>
                     <div class="form-group">
                         <label>Judul</label>
-                        <input type="text" class="form-control" name="judul" required="required">
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old ('text') }}" required=" required">
+
+                        @error('judul')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     </br>
                     <div class="form-group">
                         <label>File Surat (PDF)</label>
-                        <input type="file" class="form-control" name="file" value="{{ old ('dokumen') }}">
-                        @error('dokumen')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{$message}}</strong>
-                        </span>
-                        @enderror
+                        <input type="file" class="form-control" name="file_surat" value="{{ old ('file_surat') }}">
                     </div>
                     </br></br>
                     <div class="form-group">
                         <a href="/arsip" class="btn btn-secondary">Kembali</a>
-                        <button class="btn btn-secondary insert">Simpan</button>
+                        <button class="btn btn-secondary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -123,13 +130,6 @@
             document.getElementById("main-content").classList.toggle("active-main-content");
         });
     </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
 </body>
-<script>
-    $('.insert').click(function() {
-        swal("Berhasil!", "Data surat telah ditambahkan!", "success");
-    });
-</script>
 
 </html>
