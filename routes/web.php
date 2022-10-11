@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::get('/arsip', 'ArsipController@index');
+Route::get('/arsip/cari', 'ArsipController@cari');
