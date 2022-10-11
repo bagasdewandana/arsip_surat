@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 Route::get('/arsip', 'ArsipController@index');
 Route::get('/arsip/cari', 'ArsipController@cari');
+Route::get('/arsip/tambah', 'ArsipController@tambah');
+Route::post('/arsip/insert', 'ArsipController@insert');

@@ -26,4 +26,18 @@ class ArsipController extends Controller
         // mengirim data pegawai ke view arsip
         return view('arsip', ['surat' => $surat]);
     }
+    public function tambah()
+    {
+        return view('/tambah');
+    }
+    public function insert(Request $request)
+    {
+        DB::table('surat')->insert([
+            'nomor' => $request->nomor,
+            'kategori' => $request->kategori,
+            'judul' => $request->judul,
+            'file_surat' => $request->file,
+        ]);
+        return redirect('/arsip');
+    }
 }

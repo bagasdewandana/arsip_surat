@@ -64,45 +64,46 @@
         </button>
         <div class="card mt-5">
             <div class="card-body">
-                <h4>Arsip Surat</h4>
+                <h4>Arsip Surat >> Unggah</h4>
                 <p>
-                    Berikut ini adalah surat-surat yang telah terbit dan diarsipkan. </br>
-                    Klik "Lihat" pada kolom aksi untuk menampilkan surat
+                    Unggah surat yang telah terbit pada form ini untuk diarsipkan. </br>
+                    Catatan: </br>
+                    > Gunakan file berformat PDF
                 </p>
-                <form action="/arsip/cari" method="GET">
-                    <div class="input-group mb-2">
-                        <p>Cari surat:&nbsp;&nbsp;</p>
-                        <input type="text" class="form-control" name="cari" placeholder="search" value="{{ old('cari') }}">
-                        <input type="submit" value="&nbsp;&nbsp;Cari!&nbsp;&nbsp;">
+                <form method="POST" action="/arsip/insert">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label>Nomor Surat</label>
+                        <input type="text" class="form-control" name="nomor" required="required">
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <div class="col-sm-8">
+                            <select name="kategori" class="form-control" required="required">
+                                <option value="Undangan">Undangan</option>
+                                <option value="Pengumuman">Pengumuman</option>
+                                <option value="Nota Dinas">Nota Dinas</option>
+                                <option value="Pemberitahuan">Pemberitahuan</option>
+                            </select>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label>Judul</label>
+                        <input type="text" class="form-control" name="judul" required="required">
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label>File Surat (PDF)</label>
+                        <input type="file" class="form-control" name="file" required="required">
+                    </div>
+                    </br></br>
+                    <div class="form-group">
+                        <a href="/arsip" class="btn btn-secondary">Kembali</a>
+                        <button class="btn btn-secondary">Simpan</button>
                     </div>
                 </form>
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nomor Surat</th>
-                            <th>Kategori</th>
-                            <th>Judul</th>
-                            <th>Waktu Pengerjaan</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach($surat as $s)
-                        <tr>
-                            <td>{{ $s->nomor}}</td>
-                            <td>{{ $s->kategori}}</td>
-                            <td>{{ $s->judul}}</td>
-                            <td>{{ $s->tanggal}}</td>
-                            <td><a href="/arsip/hapus/{{ $s->nomor }}" type="button" class="btn btn-danger">Hapus</a>
-                                <a href="/arsip/unduh/{{ $s->nomor }}" type="button" class="btn btn-warning">Unduh</a>
-                                <a href="/arsip/edit/{{ $s->nomor }}" type="button" class="btn btn-primary">Lihat >></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <a href="/arsip/tambah" type="button" class="btn btn-secondary">Arsipkan Surat...</a>
             </div>
         </div>
     </section>
