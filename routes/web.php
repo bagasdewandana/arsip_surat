@@ -21,3 +21,4 @@ Route::get('/arsip', 'ArsipController@index');
 Route::get('/arsip/cari', 'ArsipController@cari');
 Route::get('/arsip/tambah', 'ArsipController@tambah');
 Route::post('/arsip/insert', 'ArsipController@insert');
+Route::get('/arsip/hapus/{judul}', 'ArsipController@hapus');

@@ -96,12 +96,17 @@
                     </br>
                     <div class="form-group">
                         <label>File Surat (PDF)</label>
-                        <input type="file" class="form-control" name="file" required="required">
+                        <input type="file" class="form-control" name="file" value="{{ old ('dokumen') }}">
+                        @error('dokumen')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                        @enderror
                     </div>
                     </br></br>
                     <div class="form-group">
                         <a href="/arsip" class="btn btn-secondary">Kembali</a>
-                        <button class="btn btn-secondary">Simpan</button>
+                        <button class="btn btn-secondary insert">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -118,6 +123,13 @@
             document.getElementById("main-content").classList.toggle("active-main-content");
         });
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
 </body>
+<script>
+    $('.insert').click(function() {
+        swal("Berhasil!", "Data surat telah ditambahkan!", "success");
+    });
+</script>
 
 </html>

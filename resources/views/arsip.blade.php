@@ -79,24 +79,24 @@
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
-                            <th>Nomor Surat</th>
-                            <th>Kategori</th>
-                            <th>Judul</th>
-                            <th>Waktu Pengerjaan</th>
-                            <th>Aksi</th>
+                            <th class="text-center">Nomor Surat</th>
+                            <th class="text-center">Kategori</th>
+                            <th class="text-center">Judul</th>
+                            <th class="text-center">Waktu Pengerjaan</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach($surat as $s)
+                        @foreach($data as $s => $value)
                         <tr>
-                            <td>{{ $s->nomor}}</td>
-                            <td>{{ $s->kategori}}</td>
-                            <td>{{ $s->judul}}</td>
-                            <td>{{ $s->tanggal}}</td>
-                            <td><a href="/arsip/hapus/{{ $s->nomor }}" type="button" class="btn btn-danger">Hapus</a>
-                                <a href="/arsip/unduh/{{ $s->nomor }}" type="button" class="btn btn-warning">Unduh</a>
-                                <a href="/arsip/edit/{{ $s->nomor }}" type="button" class="btn btn-primary">Lihat >></a>
+                            <td>{{ $value->nomor}}</td>
+                            <td>{{ $value->kategori}}</td>
+                            <td>{{ $value->judul}}</td>
+                            <td>{{ $value->tanggal}}</td>
+                            <td><a href="#" type="button" class="btn btn-danger delete" data-id="{{ $value->judul }}">Hapus</a>
+                                <a href="{{ asset ($value->file_surat) }}" type="button" class="btn btn-warning" download="{{ $value->file_surat}}">Unduh</a>
+                                <a href="/arsip/edit/{{ $value->nomor }}" type="button" class="btn btn-primary">Lihat >></a>
                             </td>
                         </tr>
                         @endforeach
@@ -117,6 +117,30 @@
             document.getElementById("main-content").classList.toggle("active-main-content");
         });
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
 </body>
+<script>
+    $('.delete').click(function() {
+        var judul = $(this).attr('data-id');
+        swal({
+                title: "Apakah anda yakin?",
+                text: "Anda akan menghapus data surat dengan judul " + judul + " ",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location = "/arsip/hapus/" + judul + ""
+                    swal("Data surat berhasil dihapus", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Data surat batal dihapus");
+                }
+            });
+    });
+</script>
 
 </html>
