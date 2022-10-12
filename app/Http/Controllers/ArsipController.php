@@ -18,16 +18,12 @@ class ArsipController extends Controller
     }
     public function cari(Request $request)
     {
-        // menangkap data pencarian
-        $cari = $request->cari;
-
-        // mengambil data dari table surat sesuai pencarian data
-        $surat = DB::table('surat')
-            ->where('judul', 'like', "%" . $cari . "%")
-            ->paginate();
-
-        // mengirim data pegawai ke view arsip
-        return view('arsip', ['surat' => $surat]);
+        if ($request) {
+            $data = Arsip::where('judul', 'like', '%' . $request->cari . '%')->get();
+        } else {
+            $data = Arsip::all();
+        }
+        return view('arsip', compact('data'));
     }
     public function tambah()
     {
@@ -71,5 +67,31 @@ class ArsipController extends Controller
     {
         $data = Arsip::where('judul', $judul)->first();
         return view('lihatsurat', compact('data'));
+    }
+    public function edit($judul)
+    {
+        $data = Arsip::where('judul', $judul)->first();
+        return view('edit', compact('data'));
+    }
+    public function update(Request $request, $judul)
+    {
+        $this->validate($request, [
+            'nomor' => 'unique:surat',
+            'file_surat' => 'mimes:pdf',
+        ]);
+
+        $dokumen = $request->file('file_surat');
+        $nama_dokumen = time() . "_" . $dokumen->getClientOriginalName();
+        $tujuan_upload = 'dokumen';
+        $dokumen->move($tujuan_upload, $nama_dokumen);
+
+        $data = Arsip::where('judul', $judul)->first();
+        unlink('dokumen/' . $data->file_surat);
+        $data->nomor = $request->nomor;
+        $data->kategori = $request->kategori;
+        $data->judul = $request->judul;
+        $data->file_surat = $nama_dokumen;
+        $data->save();
+        return Redirect('/arsip');
     }
 }

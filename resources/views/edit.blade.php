@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tambah Surat</title>
+    <title>Edit Surat</title>
     <!-- bootstrap 5 css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
@@ -64,17 +64,17 @@
         </button>
         <div class="card mt-5">
             <div class="card-body">
-                <h4>Arsip Surat >> Unggah</h4>
+                <h4>Arsip Surat >> Edit</h4>
                 <p>
-                    Unggah surat yang telah terbit pada form ini untuk diarsipkan. </br>
+                    Edit surat yang telah terbit pada form ini untuk diarsipkan. </br>
                     Catatan: </br>
                     > Gunakan file berformat PDF
                 </p>
-                <form method="POST" action="/arsip/insert" enctype="multipart/form-data">
+                <form method="POST" action="/arsip/edit/update/{{$data->judul}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Nomor Surat</label>
-                        <input type="text" class="form-control @error('nomor') is-invalid @enderror" name="nomor" value="{{ old ('nomor') }}" required=" required">
+                        <input type="text" class="form-control @error('nomor') is-invalid @enderror" name="nomor" value="{{$data->nomor}}" required=" required">
 
                         @error('nomor')
                         <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
                     <div class="form-group">
                         <label>Kategori</label>
                         <div class="col-sm-8">
-                            <select name="kategori" class="form-control" value="{{ old ('kategori') }}" required=" required">
+                            <select name="kategori" class="form-control" value="{{$data->kategori}}" required=" required">
                                 <option value="Undangan">Undangan</option>
                                 <option value="Pengumuman">Pengumuman</option>
                                 <option value="Nota Dinas">Nota Dinas</option>
@@ -97,7 +97,7 @@
                     </br>
                     <div class="form-group">
                         <label>Judul</label>
-                        <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old ('text') }}" required=" required">
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{$data->judul}}" required=" required">
 
                         @error('judul')
                         <span class="invalid-feedback" role="alert">
@@ -108,11 +108,11 @@
                     </br>
                     <div class="form-group">
                         <label>File Surat (PDF)</label>
-                        <input type="file" class="form-control" name="file_surat" value="{{ old ('file_surat') }}">
+                        <input type="file" class="form-control" name="file_surat" value="{{$data->file_surat}}">
                     </div>
                     </br></br>
                     <div class="form-group">
-                        <a href="/arsip" type="button" class="btn btn-secondary">
+                        <a href="/arsip/lihat/{{$data->judul}}" type="button" class="btn btn-secondary">
                             << Kembali</a>
                                 <button class="btn btn-secondary insert">Simpan</button>
                     </div>

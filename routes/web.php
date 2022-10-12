@@ -23,6 +23,9 @@ Route::get('/arsip/tambah', 'ArsipController@tambah');
 Route::post('/arsip/insert', 'ArsipController@insert');
 Route::get('/arsip/hapus/{judul}', 'ArsipController@hapus');
 Route::get('/arsip/lihat/{judul}', 'ArsipController@lihat');
+Route::get('/arsip/edit/{judul}', 'ArsipController@edit');
+Route::post('/arsip/edit/update/{judul}', 'ArsipController@update');
+
 Route::get('/arsip/download/{file_surat}', 'ArsipController@download');
 
 Route::get('/about', 'AboutController@index');

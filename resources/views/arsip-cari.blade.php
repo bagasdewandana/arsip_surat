@@ -73,7 +73,7 @@
                     <div class="input-group mb-2">
                         <p>Cari surat:&nbsp;&nbsp;</p>
                         <input type="text" class="form-control" name="cari" placeholder="search" value="{{ old('cari') }}">
-                        <button type="submit" class="btn btn-secondary">&nbsp;&nbsp;Cari!&nbsp;&nbsp</button>
+                        <input type="submit" value="&nbsp;&nbsp;Cari!&nbsp;&nbsp;">
                     </div>
                 </form>
                 <table class="table table-bordered table-hover table-striped">

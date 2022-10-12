@@ -73,6 +73,7 @@
                 <a href="/arsip" type="button" class="btn btn-secondary">
                     << Kembali</a>
                         <a href="/arsip/download/{{ $data->file_surat }}" type="button" class="btn btn-secondary">Unduh</a>
+                        <a href="/arsip/edit/{{ $data->judul }}" type="button" class="btn btn-secondary">Edit/Ganti File</a>
             </div>
         </div>
     </section>
